@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello World App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        #message {
+            font-size: 2em;
+            color: #333;
+            margin-top: 20px;
+        }
+        #fetchButton {
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+        }
+        #fetchButton:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <button id="fetchButton">Fetch Message</button>
+    <div id="message"></div>
+    
+    <script>
+        const apiUrl = '%%API_URL%%';
+
+        // Function to make the REST call
+        async function fetchMessage() {
+            try {
+                const response = await fetch(apiUrl);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                const data = await response.text();
+                document.getElementById('message').innerText = data;
+            } catch (error) {
+                document.getElementById('message').innerText = 'Failed to load message';
+                console.error('There has been a problem with your fetch operation:', error);
+            }
+        }
+
+        // Add event listener to the button
+        document.getElementById('fetchButton').addEventListener('click', fetchMessage);
+    </script>
+</body>
+</html>
