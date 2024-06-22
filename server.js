@@ -10,7 +10,7 @@ app.use(cors());
 const apiUrl = process.env.API_URL || 'http://localhost:8050/api/v1/greeting';
 app.set('view engine', 'ejs');
 app.get('/', (req, res) => {
-    res.render('index', { apiEndpoint: apiEndpoint });
+    res.render('index', { apiEndpoint: apiUrl });
 });
 
 app.listen(port, () => {
