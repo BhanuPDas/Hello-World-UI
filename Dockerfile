@@ -11,16 +11,16 @@ EXPOSE 3000
 CMD ["node", "server.js"]
 
 #Stage 2: Deploy to Nginx server
-FROM nginx:latest
-COPY nginx/default.conf /etc/nginx/conf.d/default.conf
+#FROM nginx:latest
+#COPY nginx/default.conf /etc/nginx/conf.d/default.conf
 
 # Copy the application files from the build stage
-COPY --from=build /usr/src/app/index.html /usr/share/nginx/html/
-COPY --from=build /usr/src/app/server.js /usr/share/nginx/html/
-COPY --from=build /usr/src/app/package.json /usr/share/nginx/html/
-COPY --from=build /usr/src/app/package-lock.json /usr/share/nginx/html/
+#COPY --from=build /usr/src/app/index.html /usr/share/nginx/html/
+#COPY --from=build /usr/src/app/server.js /usr/share/nginx/html/
+#COPY --from=build /usr/src/app/package.json /usr/share/nginx/html/
+#COPY --from=build /usr/src/app/package-lock.json /usr/share/nginx/html/
 
 # Set the working directory
-WORKDIR /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+#WORKDIR /usr/share/nginx/html
+#EXPOSE 80
+#CMD ["nginx", "-g", "daemon off;"]
