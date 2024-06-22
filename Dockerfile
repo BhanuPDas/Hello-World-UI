@@ -5,8 +5,7 @@ COPY package*.json ./
 RUN npm install
 COPY . .
 RUN npm test
-RUN ls -l 
-RUN npm run build 
+RUN ls -l
 
 #Stage 2: Deploy to Nginx server
 FROM nginx:latest
