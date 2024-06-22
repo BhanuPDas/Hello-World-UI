@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
             res.status(500).send('Error reading index.html');
             return;
         }
-        const result = data.replace('%%API_URL%%', apiUrl);
+        const result = data.replace('%API_URL%', apiUrl);
         res.send(result);
     });
 });
