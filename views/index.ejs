@@ -1,71 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello World App</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-        }
-        #message {
-            font-size: 2em;
-            color: #333;
-            margin-top: 20px;
-        }
-        #fetchButton {
-            padding: 10px 20px;
-            font-size: 1em;
-            cursor: pointer;
-            border: none;
-            background-color: #007BFF;
-            color: white;
-            border-radius: 5px;
-        }
-        #fetchButton:hover {
-            background-color: #0056b3;
-        }
-    </style>
-</head>
-<body>
-    <h1>Hello World App</h1>
-    <button id="fetchButton">Fetch Data</button>
-    <div id="response"></div>
-
-    <script>
-        // The environment variable passed from the server
-        const apiEndpoint = '<%= apiEndpoint %>';
-
-        document.getElementById('fetchButton').addEventListener('click', function() {
-            const xhr = new XMLHttpRequest();
-            xhr.open('GET', apiEndpoint, true);
-
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === XMLHttpRequest.DONE) {
-                    if (xhr.status === 200) {
-                        const response = JSON.parse(xhr.responseText);
-                        displayResponse(response);
-                    } else {
-                        console.error('Error fetching data', xhr.status, xhr.statusText);
-                        document.getElementById('response').innerHTML = 'Error fetching data';
-                    }
-                }
-            };
-
-            xhr.send();
-        });
-
-        function displayResponse(data) {
-            let html = '';
-            document.getElementById('response').innerHTML = html;
-        }
-    </script>
-</body>
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Hello World App</title>
+      <style>
+         body {
+         font-family: Arial, sans-serif;
+         display: flex;
+         flex-direction: column;
+         justify-content: center;
+         align-items: center;
+         height: 100vh;
+         margin: 0;
+         background-color: #f0f0f0;
+         }
+         #message {
+         font-size: 2em;
+         color: #333;
+         margin-top: 20px;
+         }
+         #fetchButton {
+         padding: 10px 20px;
+         font-size: 1em;
+         cursor: pointer;
+         border: none;
+         background-color: #007BFF;
+         color: white;
+         border-radius: 5px;
+         }
+         #fetchButton:hover {
+         background-color: #0056b3;
+         }
+      </style>
+   </head>
+   <body>
+      <h1>Hello World App</h1>
+      <button id="fetchButton">Fetch Greeting</button>
+      <div id="response"></div>
+      <script>
+         // The environment variable passed from the server
+         const apiEndpoint = '<%= apiEndpoint %>';
+         
+         document.getElementById('fetchButton').addEventListener('click', function() {
+             const xhr = new XMLHttpRequest();
+             xhr.open('GET', apiEndpoint, true);
+         
+             xhr.onreadystatechange = function() {
+                 if (xhr.readyState === XMLHttpRequest.DONE) {
+                     if (xhr.status === 200) {
+                         const response = JSON.parse(xhr.responseText);
+                         displayResponse(response);
+                     } else {
+                         console.error('Error Connecting to Backend', xhr.status, xhr.statusText);
+                         document.getElementById('response').innerHTML = 'Error Connecting to Backend';
+                     }
+                 }
+             };
+         
+             xhr.send();
+         });
+         
+         function displayResponse(data) {
+             let html = '';
+             document.getElementById('response').innerHTML = html;
+         }
+      </script>
+   </body>
 </html>
