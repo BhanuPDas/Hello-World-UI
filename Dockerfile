@@ -19,7 +19,7 @@ COPY --from=build /usr/src/app/index.html /usr/share/nginx/html/
 COPY --from=build /usr/src/app/server.js /usr/share/nginx/html/
 COPY --from=build /usr/src/app/package.json /usr/share/nginx/html/
 COPY --from=build /usr/src/app/package-lock.json /usr/share/nginx/html/
-RUN sed -i "s/%%API_URL%%/$(echo "$API_URL" | sed 's/\//\\&/g')/g" /usr/share/nginx/html/index.html
+RUN sed -i "s/%%API_URL%%/$(echo "$API_URL")/g" /usr/share/nginx/html/index.html
 
 # Set the working directory
 WORKDIR /usr/share/nginx/html
