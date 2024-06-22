@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require('path');
 
 const app = express();
-const apiUrl = 'http://localhost:8080/api/hello';
+const apiUrl = 'http://localhost:8050/api/v1/greeting';
 
 app.get('/', (req, res) => {
     fs.readFile(path.join(__dirname, 'index.html'), 'utf8', (err, data) => {
