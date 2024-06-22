@@ -7,6 +7,8 @@ COPY . .
 RUN npm test
 RUN ls -l
 RUN sed -i 's/%%API_URL%%/'"$(node -e 'console.log(process.env.API_URL)')"'/' index.html
+EXPOSE 3000
+CMD ["node", "server.js"]
 
 #Stage 2: Deploy to Nginx server
 FROM nginx:latest
