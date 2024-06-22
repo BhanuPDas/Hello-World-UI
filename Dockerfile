@@ -4,8 +4,9 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 RUN npm install
 COPY . .
-ENV API_URL ${API_URL}
 RUN npm test
+RUN ls -l 
+RUN npm run build 
 
 #Stage 2: Deploy to Nginx server
 FROM nginx:latest
