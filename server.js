@@ -1,13 +1,13 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
-
+const cors = require('cors');
 const app = express();
 const port = 3000;
 
 // Read the API URL from an environment variable
-const apiUrl = process.env.API_URL || 'http://localhost:8050/api/v1/greeting';
 app.use(cors());
+const apiUrl = process.env.API_URL || 'http://localhost:8050/api/v1/greeting';
 app.get('/', (req, res) => {
     fs.readFile(path.join(__dirname, 'index.html'), 'utf8', (err, data) => {
         if (err) {
