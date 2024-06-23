@@ -1,0 +1,42 @@
+pipeline {
+    agent any
+
+    environment {
+        GIT_CREDENTIALS = credentials('BhanuPDas')
+    }
+    tools {
+                maven 'Node21'
+            }
+
+    stages {
+
+        stage('Checkout') {
+        when {
+            expression {
+               env.BRANCH_NAME == 'develop' || env.BRANCH_NAME == 'main'
+            }
+        }
+        steps {
+                git branch: '${env.BRANCH_NAME}', credentialsId: 'BhanuPDas', url: 'https://github.com/BhanuPDas/Hello-World-UI.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'npm install'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'npm test'
+            }
+        }
+    }
+
+    post {
+        always {
+            echo "Pipeline has completed"
+        }
+    }
+}
