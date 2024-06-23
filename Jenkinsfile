@@ -95,7 +95,7 @@ pipeline {
                         echo "Network '$networkName' does not exist."
                         echo "Create Network '$networkName'"
                         sh "docker network create qa"
-                        sh "docker run -it --network qa -p 3001:8050 -d --env-file=qa.env ${env.DOCKER_IMAGE}.qa:${DOCKERBUILD}"
+                        sh "docker run -it --network qa -p 3001:3000 -d --env-file=qa.env ${env.DOCKER_IMAGE}.qa:${DOCKERBUILD}"
                     }
                 }
             }
