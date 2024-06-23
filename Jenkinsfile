@@ -15,6 +15,17 @@ pipeline {
 
     stages {
 
+       stage('Checkout') {
+        when {
+            expression {
+               env.BRANCH_NAME == 'develop' || env.BRANCH_NAME == 'main'
+            }
+        }
+        steps {
+                git branch: '${env.BRANCH_NAME}', credentialsId: 'BhanuPDas', url: 'https://github.com/BhanuPDas/Hello-World-UI.git'
+            }
+        }
+
         stage('Build') {
         when {
             expression {
