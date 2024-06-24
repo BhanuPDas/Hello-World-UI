@@ -22,6 +22,7 @@ pipeline {
             }
         }
         steps {
+                deleteDir()
                 git branch: '${env.BRANCH_NAME}', credentialsId: 'BhanuPDas', url: 'https://github.com/BhanuPDas/Hello-World-UI.git'
             }
         }
