@@ -10,7 +10,7 @@ pipeline {
         DOCKERPATH = "bhanupdas/hello-world-ui"
     }
     tools {
-                maven 'Node21'
+                nodejs 'Node21'
             }
 
     stages {
@@ -143,7 +143,6 @@ pipeline {
             expression {
                env.BRANCH_NAME == 'main'
             }
-             cron('0 21 * * *')
         }
             steps {
                 script {
