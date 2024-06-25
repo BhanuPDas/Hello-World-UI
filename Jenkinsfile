@@ -14,7 +14,6 @@ pipeline {
             }
 
     stages {
-
         stage('Build') {
         when {
                branch "develop"
