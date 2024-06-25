@@ -4,7 +4,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building...'
-                }
+            }
         }
         stage('Test') {
             steps {
@@ -16,7 +16,6 @@ pipeline {
                 echo 'Deploying...'
             }
         }
-    }
     }
     post {
         always {
