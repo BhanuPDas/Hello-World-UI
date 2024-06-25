@@ -39,10 +39,10 @@ pipeline {
                 script {
                         sh "docker login -u ${DOCKER_USER} -p ${DOCKER_PWD}"
                         sh "docker build -t ${DOCKER_IMAGE}.${DOCKERBUILD} ."
-                        sh "docker image tag ${DOCKER_IMAGE}.${DOCKERBUILD} ${DOCKERPATH}:{DOCKER_IMAGE}.${DOCKERBUILD}"
+                        sh "docker image tag ${DOCKER_IMAGE}.${DOCKERBUILD} ${DOCKERPATH}:${DOCKER_IMAGE}.${DOCKERBUILD}"
                         sh "docker image push ${DOCKERPATH}:${DOCKER_IMAGE}.${DOCKERBUILD}"
                         sh "docker image pull ${DOCKERPATH}:${DOCKER_IMAGE}.${DOCKERBUILD}"
-                        sh "docker image tag ${DOCKER_IMAGE}.${DOCKERBUILD}:latest {DOCKER_IMAGE}.${DOCKERBUILD}:dev"
+                        sh "docker image tag ${DOCKER_IMAGE}.${DOCKERBUILD}:latest ${DOCKER_IMAGE}.${DOCKERBUILD}:dev"
                         def networkName = 'dev'
                         def networkExists = sh(script: "docker network inspect $networkName > /dev/null 2>&1", returnStatus: true)
                     
@@ -67,7 +67,7 @@ pipeline {
                 script {
                         def networkName = 'qa'
                         sh "docker image pull ${DOCKERPATH}:${DOCKER_IMAGE}.${DOCKERBUILD}"
-                        sh "docker image tag ${DOCKER_IMAGE}.${DOCKERBUILD}:latest {DOCKER_IMAGE}.${DOCKERBUILD}:qa"
+                        sh "docker image tag ${DOCKER_IMAGE}.${DOCKERBUILD}:latest ${DOCKER_IMAGE}.${DOCKERBUILD}:qa"
                         def networkExists = sh(script: "docker network inspect $networkName > /dev/null 2>&1", returnStatus: true)
                     
                     if (networkExists == 0) {
@@ -100,7 +100,7 @@ pipeline {
                 script {
                         sh "docker login -u ${DOCKER_USER} -p ${DOCKER_PWD}"
                         sh "docker image pull ${DOCKERPATH}:${DOCKER_IMAGE}.${DOCKERBUILD}"
-                        sh "docker image tag ${DOCKER_IMAGE}.${DOCKERBUILD}:latest {DOCKER_IMAGE}.${DOCKERBUILD}:stage"
+                        sh "docker image tag ${DOCKER_IMAGE}.${DOCKERBUILD}:latest ${DOCKER_IMAGE}.${DOCKERBUILD}:stage"
                         def networkName = 'stage'
                         def networkExists = sh(script: "docker network inspect $networkName > /dev/null 2>&1", returnStatus: true)
                     
@@ -125,7 +125,7 @@ pipeline {
                 script {
                         sh "docker login -u ${DOCKER_USER} -p ${DOCKER_PWD}"
                         sh "docker image pull ${DOCKERPATH}:${DOCKER_IMAGE}.${DOCKERBUILD}"
-                        sh "docker image tag ${DOCKER_IMAGE}.${DOCKERBUILD}:latest {DOCKER_IMAGE}.${DOCKERBUILD}:prod"
+                        sh "docker image tag ${DOCKER_IMAGE}.${DOCKERBUILD}:latest ${DOCKER_IMAGE}.${DOCKERBUILD}:prod"
                         def networkName = 'prod'
                         def networkExists = sh(script: "docker network inspect $networkName > /dev/null 2>&1", returnStatus: true)
                     
