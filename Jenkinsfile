@@ -14,46 +14,27 @@ pipeline {
             }
 
     stages {
-
-       stage('Checkout') {
-        when {
-            expression {
-               env.BRANCH_NAME == 'develop' || env.BRANCH_NAME == 'main'
-            }
-        }
-        steps {
-                deleteDir()
-                git branch: '${env.BRANCH_NAME}', credentialsId: 'BhanuPDas', url: 'https://github.com/BhanuPDas/Hello-World-UI.git'
-            }
-        }
-
         stage('Build') {
         when {
-            expression {
-               env.BRANCH_NAME == 'develop'
-            }
+               branch "develop"
         }
             steps {
-                sh 'npm install'
+                sh "npm install"
             }
         }
 
         stage('Test') {
         when {
-            expression {
-               env.BRANCH_NAME == 'develop'
-            }
+               branch "develop"
         }
             steps {
-                sh 'npm test'
+                sh "npm test"
             }
         }
 
         stage('Deploy-Dev') {
         when {
-            expression {
-               env.BRANCH_NAME == 'develop'
-            }
+               branch "develop"
         }
             steps {
                 script {
@@ -79,9 +60,7 @@ pipeline {
         
         stage('Deploy-Qa') {
         when {
-            expression {
-               env.BRANCH_NAME == 'develop'
-            }
+               branch "develop"
         }
             steps {
                 script {
@@ -104,9 +83,7 @@ pipeline {
         
         stage('Release') {
         when {
-            expression {
-               env.BRANCH_NAME == 'develop'
-            }
+               branch "develop"
         }
             steps {
             	echo "New Version is released."
@@ -115,9 +92,7 @@ pipeline {
         
         stage('Deploy-Stage') {
         when {
-            expression {
-               env.BRANCH_NAME == 'main'
-            }
+               branch "main"
         }
             steps {
                 script {
@@ -141,9 +116,7 @@ pipeline {
         
         stage('Deploy-Prod') {
         when {
-            expression {
-               env.BRANCH_NAME == 'main'
-            }
+               branch "main"
         }
             steps {
                 script {
